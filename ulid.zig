@@ -45,10 +45,10 @@ pub const ULID = struct {
     }
 
     pub fn bindField(self: ULID, alloc: *std.mem.Allocator) !BaseType {
-        var res = try alloc.alloc(u8, 26);
-        base32.formatInt(u48, self.timestamp, res[0..10]);
-        base32.formatInt(u80, self.randomnes, res[10..26]);
-        return res;
+        var res = try std.ArrayList(u8).initCapacity(alloc, 26);
+        defer res.deinit();
+        try res.writer().print("{}", .{self});
+        return res.toOwnedSlice();
     }
 
     pub const fromString = readField;
