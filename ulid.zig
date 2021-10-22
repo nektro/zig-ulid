@@ -54,9 +54,13 @@ pub const ULID = struct {
     pub const fromString = readField;
     pub const toString = bindField;
 
-    pub fn format(self: ULID, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) @TypeOf(writer).Error!void {
+    pub fn format(self: ULID, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) !void {
         _ = fmt;
         _ = options;
-        try writer.writeAll(self.toString());
+
+        var buf: [26]u8 = undefined;
+        base32.formatInt(u48, self.timestamp, buf[0..10]);
+        base32.formatInt(u80, self.randomnes, buf[10..26]);
+        try writer.writeAll(&buf);
     }
 };
