@@ -7,9 +7,9 @@ const extras = @import("extras");
 
 pub const Factory = struct {
     epoch: i64,
-    rand: *std.rand.Random,
+    rand: std.rand.Random,
 
-    pub fn init(epoch: i64, rand: *std.rand.Random) Factory {
+    pub fn init(epoch: i64, rand: std.rand.Random) Factory {
         return Factory{
             .epoch = epoch,
             .rand = rand,
