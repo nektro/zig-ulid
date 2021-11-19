@@ -36,7 +36,7 @@ pub const ULID = struct {
 
     pub const BaseType = string;
 
-    pub fn readField(alloc: *std.mem.Allocator, value: BaseType) !ULID {
+    pub fn parse(alloc: *std.mem.Allocator, value: BaseType) !ULID {
         if (value.len != 26) return error.Ulid;
         return ULID{
             .timestamp = try std.math.cast(u48, try extras.sliceToInt(u50, u5, try base32.decode(alloc, value[0..10]))),
@@ -44,15 +44,15 @@ pub const ULID = struct {
         };
     }
 
-    pub fn bindField(self: ULID, alloc: *std.mem.Allocator) !BaseType {
+    pub fn toString(self: ULID, alloc: *std.mem.Allocator) !BaseType {
         var res = try std.ArrayList(u8).initCapacity(alloc, 26);
         defer res.deinit();
         try res.writer().print("{}", .{self});
         return res.toOwnedSlice();
     }
 
-    pub const fromString = readField;
-    pub const toString = bindField;
+    pub const readField = parse;
+    pub const bindField = toString;
 
     pub fn format(self: ULID, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) !void {
         _ = fmt;
