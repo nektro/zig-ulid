@@ -6,7 +6,7 @@ const range = @import("range").range;
 
 const alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
-pub fn decode(alloc: *std.mem.Allocator, input: string) ![]const u5 {
+pub fn decode(alloc: std.mem.Allocator, input: string) ![]const u5 {
     const list = &std.ArrayList(u5).init(alloc);
     defer list.deinit();
 
