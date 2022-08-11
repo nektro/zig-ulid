@@ -56,13 +56,16 @@ pub const ULID = struct {
     pub const readField = parse;
     pub const bindField = toString;
 
-    pub fn format(self: ULID, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) !void {
-        _ = fmt;
-        _ = options;
-
+    pub fn bytes(self: ULID) [26]u8 {
         var buf: [26]u8 = undefined;
         base32.formatInt(u48, self.timestamp, buf[0..10]);
         base32.formatInt(u80, self.randomnes, buf[10..26]);
-        try writer.writeAll(&buf);
+        return buf;
+    }
+
+    pub fn format(self: ULID, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) !void {
+        _ = fmt;
+        _ = options;
+        try writer.writeAll(&self.bytes());
     }
 };
