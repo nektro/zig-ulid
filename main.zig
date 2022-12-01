@@ -26,7 +26,7 @@ pub fn main() anyerror!void {
 
 fn ensureFromTo(before: string) !void {
     const alloc = std.heap.page_allocator;
-    const ul = try ulid.ULID.fromString(alloc, before);
+    const ul = try ulid.ULID.parse(before);
     const after = try ul.toString(alloc);
     try std.testing.expectEqualStrings(before, after);
 }
