@@ -12,7 +12,7 @@ pub fn decode(comptime amount: usize, input: []const u8) [amount]u5 {
     var index: usize = 0;
 
     for (input) |c| {
-        for (alphabet) |d, i| {
+        for (alphabet, 0..) |d, i| {
             if (c == d) {
                 list[index] = @intCast(u5, i);
                 index += 1;
@@ -27,7 +27,7 @@ pub fn formatInt(comptime T: type, n: T, buf: []u8) void {
     const l = @intCast(T, alphabet.len);
     var x = n;
     var i = buf.len;
-    for (range(i)) |_, j| {
+    for (range(i), 0..) |_, j| {
         buf[j] = alphabet[0];
     }
     while (true) {
