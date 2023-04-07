@@ -38,11 +38,15 @@ pub const ULID = struct {
 
     usingnamespace extras.StringerJsonStringifyMixin(@This());
 
-    pub fn parse(alloc: std.mem.Allocator, value: BaseType) !ULID {
+    pub fn parse(value: BaseType) !ULID {
         if (value.len != 26) return error.Ulid;
+
+        const decoded_timestamp = base32.decode(10, value[0..10]);
+        const decoded_randomnes = base32.decode(16, value[10..26]);
+
         return ULID{
-            .timestamp = std.math.cast(u48, try extras.sliceToInt(u50, u5, try base32.decode(alloc, value[0..10]))) orelse return error.Ulid,
-            .randomnes = try extras.sliceToInt(u80, u5, try base32.decode(alloc, value[10..26])),
+            .timestamp = std.math.cast(u48, try extras.sliceToInt(u50, u5, &decoded_timestamp)) orelse return error.Ulid,
+            .randomnes = try extras.sliceToInt(u80, u5, &decoded_randomnes),
         };
     }
 

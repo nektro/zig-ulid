@@ -6,25 +6,28 @@ const range = @import("range").range;
 
 const alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
-pub fn decode(alloc: std.mem.Allocator, input: string) ![]const u5 {
-    var list = std.ArrayList(u5).init(alloc);
-    errdefer list.deinit();
+pub fn decode(comptime amount: usize, input: []const u8) [amount]u5 {
+    var list: [amount]u5 = undefined;
+
+    var index: usize = 0;
 
     for (input) |c| {
-        for (alphabet) |d, i| {
+        for (alphabet, 0..) |d, i| {
             if (c == d) {
-                try list.append(@intCast(u5, i));
+                list[index] = @intCast(u5, i);
+                index += 1;
             }
         }
     }
-    return list.toOwnedSlice();
+
+    return list;
 }
 
 pub fn formatInt(comptime T: type, n: T, buf: []u8) void {
     const l = @intCast(T, alphabet.len);
     var x = n;
     var i = buf.len;
-    for (range(i)) |_, j| {
+    for (range(i), 0..) |_, j| {
         buf[j] = alphabet[0];
     }
     while (true) {
