@@ -11,9 +11,9 @@ pub fn decode(alloc: std.mem.Allocator, input: string) ![]const u5 {
     errdefer list.deinit();
 
     for (input) |c| {
-        for (alphabet) |d, i| {
+        for (alphabet, 0..) |d, i| {
             if (c == d) {
-                try list.append(@intCast(u5, i));
+                try list.append(@intCast(i));
             }
         }
     }
@@ -21,14 +21,14 @@ pub fn decode(alloc: std.mem.Allocator, input: string) ![]const u5 {
 }
 
 pub fn formatInt(comptime T: type, n: T, buf: []u8) void {
-    const l = @intCast(T, alphabet.len);
+    const l: T = @intCast(alphabet.len);
     var x = n;
     var i = buf.len;
-    for (range(i)) |_, j| {
+    for (0..i) |j| {
         buf[j] = alphabet[0];
     }
     while (true) {
-        const a = @intCast(usize, x % l);
+        const a: usize = @intCast(x % l);
         x = x / l;
         buf[i - 1] = alphabet[a];
         i -= 1;
