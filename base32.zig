@@ -2,7 +2,6 @@
 
 const std = @import("std");
 const string = []const u8;
-const range = @import("range").range;
 
 const alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
