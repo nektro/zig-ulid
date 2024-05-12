@@ -1,18 +1,30 @@
 const std = @import("std");
-const deps = @import("./deps.zig");
 
-pub fn build(b: *std.build.Builder) void {
+pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
+    const optimize = b.standardOptimizeOption(.{});
 
-    const mode = b.standardReleaseOptions();
+    const extras_dep = b.dependency("extras", .{});
+    const extras = extras_dep.module("extras");
 
-    const exe = b.addExecutable("zig-ulid", "main.zig");
-    exe.setTarget(target);
-    exe.setBuildMode(mode);
-    deps.addAllTo(exe);
-    exe.install();
+    const exe = b.addExecutable(.{
+        .name = "zig-ulid",
+        .root_source_file = b.path("main.zig"),
+        .target = target,
+        .optimize = optimize,
+    });
 
-    const run_cmd = exe.run();
+    const mod = b.addModule(
+        "zig-ulid",
+        .{ .root_source_file = .{ .path = "ulid.zig" } },
+    );
+
+    mod.addImport("extras", extras);
+    exe.root_module.addImport("extras", extras);
+
+    b.installArtifact(exe);
+
+    const run_cmd = b.addRunArtifact(exe);
     run_cmd.step.dependOn(b.getInstallStep());
     if (b.args) |args| {
         run_cmd.addArgs(args);

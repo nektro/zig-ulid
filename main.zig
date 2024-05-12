@@ -1,6 +1,6 @@
 const std = @import("std");
 const string = []const u8;
-const ulid = @import("ulid");
+const ulid = @import("ulid.zig");
 
 pub fn main() anyerror!void {
     std.log.info("All your codebase are belong to us.", .{});

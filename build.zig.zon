@@ -1,0 +1,20 @@
+.{
+    .name = "zig-ulid",
+    .version = "0.1.0",
+    .minimum_zig_version = "0.11.0",
+    .dependencies = .{
+        .extras = .{
+            .url = "https://github.com/lun-4/zig-extras/archive/02f98d6c3793718c0d6999870258b33997f597c2.tar.gz",
+            .hash = "1220b2675cd7ffe415bcc394f768f49ce4c5ae13c39eece23841c22eaf2d1d8bc68b",
+        },
+    },
+    .paths = .{
+        // For example...
+        "build.zig",
+        "build.zig.zon",
+        "ulid.zig",
+        "base32.zig",
+        "LICENSE",
+        "README.md",
+    },
+}
