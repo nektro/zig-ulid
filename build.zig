@@ -16,7 +16,7 @@ pub fn build(b: *std.Build) void {
 
     const mod = b.addModule(
         "zig-ulid",
-        .{ .root_source_file = .{ .path = "ulid.zig" } },
+        .{ .root_source_file = b.path("ulid.zig") },
     );
 
     mod.addImport("extras", extras);
