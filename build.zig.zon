@@ -4,8 +4,8 @@
     .minimum_zig_version = "0.11.0",
     .dependencies = .{
         .extras = .{
-            .url = "https://github.com/lun-4/zig-extras/archive/02f98d6c3793718c0d6999870258b33997f597c2.tar.gz",
-            .hash = "1220b2675cd7ffe415bcc394f768f49ce4c5ae13c39eece23841c22eaf2d1d8bc68b",
+            .url = "https://github.com/lun-4/zig-extras/archive/b3534f6a82bb032f791c6cd6e8d425c437119245.tar.gz",
+            .hash = "1220836e32dcd227be2c20b12e7373d341b39582ef346b4c990f64557c37fcc7e1fa",
         },
     },
     .paths = .{
