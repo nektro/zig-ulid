@@ -19,7 +19,7 @@ pub const Factory = struct {
     pub fn newULID(self: Factory) ULID {
         const now = std.time.milliTimestamp();
         return ULID{
-            .timestamp = std.math.cast(u48, now - self.epoch) orelse @panic("time.milliTimestamp() is higher than 281474976710655"),
+            .timestamp = std.math.cast(u48, now - self.epoch) orelse @panic("time.milliTimestamp() is higher than 281474976710655"), // this is Tue Aug 02 10889 05:31:50.655 UTC
             .randomnes = self.rand.int(u80),
         };
     }
