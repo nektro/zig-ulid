@@ -13,6 +13,7 @@ pub fn build(b: *std.Build) void {
     deps.addAllTo(tests);
 
     const tests_run = b.addRunArtifact(tests);
+    tests_run.has_side_effects = true;
 
     const test_step = b.step("test", "dummy test step to pass CI checks");
     test_step.dependOn(&tests_run.step);
