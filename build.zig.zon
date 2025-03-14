@@ -1,11 +1,12 @@
 .{
-    .name = "zig-ulid",
+    .name = .zig_ulid,
+    .fingerprint = 0xae22bba98c9de5b,
     .version = "0.1.0",
     .minimum_zig_version = "0.11.0",
     .dependencies = .{
         .extras = .{
-            .url = "https://github.com/lun-4/zig-extras/archive/b3534f6a82bb032f791c6cd6e8d425c437119245.tar.gz",
-            .hash = "1220836e32dcd227be2c20b12e7373d341b39582ef346b4c990f64557c37fcc7e1fa",
+            .url = "git+https://github.com/lun-4/zig-extras.git?ref=zon#dea2030cbca9afe8d249113e55bb84842ed56613",
+            .hash = "extras-0.1.1-oSfdZjg0AQBx3iXB1yFxTAEbr1wNw4EsSIaOfWb6emO9",
         },
     },
     .paths = .{
