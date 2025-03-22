@@ -30,7 +30,7 @@ pub const Factory = struct {
 /// |----------| |----------------|
 ///  Timestamp       Randomness
 ///    48bits          80bits
-pub const ULID = packed struct {
+pub const ULID = struct {
     timestamp: u48,
     randomnes: u80,
 
