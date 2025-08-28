@@ -16,6 +16,7 @@ pub fn build(b: *std.Build) void {
     tests.use_lld = !disable_llvm;
 
     const tests_run = b.addRunArtifact(tests);
+    tests_run.setCwd(b.path("."));
     tests_run.has_side_effects = true;
 
     const test_step = b.step("test", "dummy test step to pass CI checks");
