@@ -69,4 +69,8 @@ pub const ULID = struct {
         _ = options;
         try writer.writeAll(&self.bytes());
     }
+
+    pub fn nprint(self: ULID, writer: anytype) !void {
+        try writer.writeAll(&self.bytes());
+    }
 };
