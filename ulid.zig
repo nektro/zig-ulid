@@ -37,7 +37,9 @@ pub const ULID = struct {
 
     pub const BaseType = string;
 
-    usingnamespace extras.StringerJsonStringifyMixin(@This());
+    pub fn jsonStringify(self: @This(), json_stream: anytype) !void {
+        try json_stream.write(&self.bytes());
+    }
 
     pub fn parse(alloc: std.mem.Allocator, value: BaseType) !ULID {
         if (value.len != 26) return error.Ulid;
