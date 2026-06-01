@@ -6,7 +6,7 @@ const string = []const u8;
 const alphabet = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
 
 pub fn decode(alloc: std.mem.Allocator, input: string) ![]const u5 {
-    var list = std.ArrayList(u5).init(alloc);
+    var list = std.array_list.Managed(u5).init(alloc);
     errdefer list.deinit();
 
     for (input) |c| {

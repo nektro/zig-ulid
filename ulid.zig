@@ -50,7 +50,7 @@ pub const ULID = struct {
     }
 
     pub fn toString(self: ULID, alloc: std.mem.Allocator) !BaseType {
-        var res = try std.ArrayList(u8).initCapacity(alloc, 26);
+        var res = try std.array_list.Managed(u8).initCapacity(alloc, 26);
         defer res.deinit();
         try res.appendSlice(&self.bytes());
         return res.toOwnedSlice();
