@@ -71,4 +71,8 @@ pub const ULID = struct {
     pub fn nprint(self: ULID, writer: anytype) !void {
         try writer.writeAll(&self.bytes());
     }
+
+    pub fn stringifyJson(self: ULID, writer: anytype, options: std.json.Stringify.Options, json: type) !void {
+        return json.stringify(writer, &self.bytes(), options);
+    }
 };
