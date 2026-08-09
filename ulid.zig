@@ -36,6 +36,7 @@ pub const ULID = struct {
     randomnes: u80,
 
     pub const BaseType = string;
+    pub const baseTypeName = "char(26)";
 
     pub fn parse(alloc: std.mem.Allocator, value: BaseType) !ULID {
         if (value.len != 26) return error.Ulid;
