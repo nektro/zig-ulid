@@ -53,8 +53,11 @@ pub const ULID = struct {
         return res.toOwnedSlice();
     }
 
+    pub fn bindField(self: ULID) ![26]u8 {
+        return self.bytes();
+    }
+
     pub const readField = parse;
-    pub const bindField = toString;
 
     pub fn bytes(self: ULID) [26]u8 {
         var buf: [26]u8 = undefined;
