@@ -77,7 +77,11 @@ pub const ULID = struct {
     }
 
     pub fn stringifyJson(self: ULID, writer: anytype, options: std.json.Stringify.Options, json: type) !void {
-        return json.stringify(writer, &self.bytes(), options);
+        return json.stringify2(writer, options, .{
+            .s = &self.bytes(),
+            .t = self.timestamp,
+            .r = self.randomnes,
+        });
     }
 
     pub fn createdAt(self: ULID, epoch: u64) time.DateTime {
