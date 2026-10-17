@@ -66,12 +66,6 @@ pub const ULID = struct {
         return buf;
     }
 
-    pub fn format(self: ULID, comptime fmt: []const u8, options: std.fmt.FormatOptions, writer: anytype) !void {
-        _ = fmt;
-        _ = options;
-        try writer.writeAll(&self.bytes());
-    }
-
     pub fn nprint(self: ULID, writer: anytype) !void {
         try writer.writeAll(&self.bytes());
     }
