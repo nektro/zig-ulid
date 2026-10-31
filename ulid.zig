@@ -38,6 +38,13 @@ pub const ULID = struct {
     pub const BaseType = string;
     pub const baseTypeName = "char(26)";
 
+    pub fn init(timestamp: u48, randomnes: u80) ULID {
+        return .{
+            .timestamp = timestamp,
+            .randomnes = randomnes,
+        };
+    }
+
     pub fn parse(alloc: std.mem.Allocator, value: BaseType) !ULID {
         if (value.len != 26) return error.Ulid;
         return ULID{
